@@ -1,0 +1,86 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+    <title>Flickoader</title>
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.css">
+    <!-- JavaScript HTML requirements -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+</head>
+
+<body>
+<div data-role="page" id="home">
+    <header data-role="header" data-position="fixed">
+        <h1>Floader</h1>
+		<a href="#setting" data-icon="gear" data-theme="a"  class="ui-btn-right">Setting</a>
+    </header>    
+    <section data-role="content">
+        <h3>Upload Your Photo to Flickr</h3>
+		<p><a href="#" data-role="button" data-icon="plus" data-theme="a">Upload</a></p>
+
+       	<h4>Keyword</h4>
+		<div data-role="fieldcontain">
+    <label for="name">Text Input:</label>
+    <input type="text" name="name" id="name" value=""  />
+</div>
+       	<h4>Suggestions</h4>
+		<p>In copyright law, there is a necessity for little flexibility as to what constitutes authorship. The United States Copyright Office defines copyright as "a form of protection provided by the laws of the United States (title 17, U.S. Code) to authors of "original works of authorship".[2] Holding the title of "author" over any "literary, dramatic, musical, artistic, [or] certain other intellectual works" give rights to this person, the owner of the copyright, exclusive right to do or authorize any production or distribution of their work. Any person or entity wishing to use intellectual property held under copyright must receive permission from the copyright holder to use this work, and often will be asked to pay for the use of copyrighted material. After a fixed amount of time, the copyright expires on intellectual work and it enters the public domain, where it can be used without limit. Copyright law has been amended time and time again since the inception of the law to extend the length of this fixed period where the work is exclusively controlled by the copyright holder. However, copyright is merely the legal reassurance that one owns his/her work. Technically, someone owns their work from the time it's created. An interesting aspect of authorship emerges with copyright in that it can be passed down to another upon one's death. The person who inherits the copyright is not the author, but enjoys the same legal benefits.
+Questions arise as to the application of copyright law. How does it, for example, apply to the complex issue of fan fiction? If the media agency responsible for the authorized production allows material from fans, what is the limit before legal constraints from actors, music, and other considerations, come into play? As well, how does copyright apply to fan-generated stories for books? What powers do the original authors, as well as the publishers, have in regulating or even stopping the fan fiction?</p>
+    </section>       
+    <footer data-role="footer" data-position="fixed">
+        <div data-role="navbar">
+		<ul>
+			<li><a href="#home" data-icon="home" data-theme="a" class="ui-btn-active ui-state-persist" >Uploader</a></li>
+			<li><a href="#photostream"  data-icon="grid" data-theme="a" >Photostream</a></li>
+		</ul>
+		</div>
+	</footer>
+</div>
+
+<div data-role="page" id="photostream">
+    <header data-role="header" data-position="fixed">
+        <h1>Floader</h1>
+		<a href="#setting" data-icon="gear" data-theme="a"  class="ui-btn-right">Setting</a>
+    </header>      
+    <section data-role="content">
+		<h3>Photostream</h3>	
+        <ul data-role="listview" data-split-icon="gear" data-inset="true">
+            <li>
+                <a href="#toobin">
+                    <h4>Jeffrey Toobin<br>Black Robed Secrets</h4>
+                    <h4>October 19, 2011</h4>                   
+                </a>
+                <a href="#buytix" data-rel="dialog" data-transition="pop">Buy Tickets</a>
+            </li>
+        </ul>
+    </section>       
+    <footer data-role="footer" data-position="fixed">
+        <div data-role="navbar">
+		<ul>
+			<li><a href="#home" data-icon="home" data-theme="a" >Uploader</a></li>
+			<li><a href="#photostream"  data-icon="grid" data-theme="a"  class="ui-btn-active ui-state-persist">Photostream</a></li>
+		</ul>
+		</div>
+	</footer>
+</div>
+
+<div data-role="dialog" id="setting">
+    <header data-role="header" data-position="fixed">
+        <h1>Setting</h1>
+    </header>      
+    <section data-role="content" style="text-align:center;">
+        <strong>Flickr ID</strong><br>
+        <a href="#">Public_iolab</a><br><br>        
+        <strong>Developer Info</strong><br>
+        <a href="#">Chan,</a>
+		<a href="#"> Haroon,</a>
+		<a href="#"> Peter</a><br><br>        
+        <div class="ui-bar">
+        	<a href="#contacus" data-icon="check" data-theme="a">Contact Us</a>
+        </div>
+    </section>
+	</div>
+</body>
+</html>
