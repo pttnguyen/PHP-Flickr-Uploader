@@ -7,9 +7,9 @@ function getTags(keyWord) {
 	var tagList1 = [];
     var tagss = [];
 
-    var apiKey = '0170b9e61b8f3a6573aad98a7e1bb474';
+    var apiKey = '8feb459f9cd322658556e3a761867c46';
 
-    //http://api.flickr.com/services/rest/?method=flickr.tags.getRelated&api_key=0170b9e61b8f3a6573aad98a7e1bb474&tag=london
+    //http://api.flickr.com/services/rest/?method=flickr.tags.getRelated&api_key=8feb459f9cd322658556e3a761867c46&tag=london
     $.getJSON('http://api.flickr.com/services/rest/?method=flickr.tags.getRelated&api_key=' + apiKey + '&tag=' + keyWord + '&format=json&nojsoncallback=1', function(json) {
         //alert("callback executed as response recieved");
     	$(json).each(function(index) {
