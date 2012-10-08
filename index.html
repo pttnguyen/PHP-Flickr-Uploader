@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+	<link rel="stylesheet" type="text/css" href="style.css" />
+	<!--<script type="text/javascript" src="jquery-1.8.1.min.js"></script>-->
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+	<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="script.js"></script>
+</head>
+
+<body>
+
+	<div class="container" id="load">
+		<h1>Flicker Tag Search</h1>
+		<form id="form-flickr">
+			<label for="form-flickr-keyword">Enter a keyword:</label>
+			<input type="text" id="form-flickr-keyword" name="form-flickr-keyword" value="vellore" />
+			<input type="submit" id="form-flickr-submit" value="Submit" />
+		</form>
+		<ul id="tag-list"></ul>
+	</div>
+	<div class="container" id="upload">
+		<output id="list"></output>
+		<ul id="tag-upload-list"></ul>
+	</div>	
+
+</body>
+</html>
