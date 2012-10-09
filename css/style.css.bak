@@ -1,0 +1,101 @@
+body{
+	overflow:hidden;
+}
+#upload_file_name{
+	border-top: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+	padding: 1px 5px 1px 5px;
+	border-radius: 5px;
+	color: #000;
+	background: #fff;
+}
+#load .ui-block-a{
+	width:85%;
+}
+#load .ui-block-b{
+	width:15%;
+	float:right;
+}
+#tag-list .ui-block-a{
+	width:50%;
+}
+#tag-list .ui-block-b{
+	width:50%;
+	float:right;
+}
+#tag-list{
+}
+#form-flickr{
+	overflow:hidden;
+	padding: 7px 0 0 5px;	
+}
+.tag{
+	margin: 5px;
+	width: 150px;
+	display: inline-block;	
+}
+
+.tags, .close{
+	border-top: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+	border-right: 1px solid #ccc;
+	padding: 1px 5px 1px 5px;
+	color: #000;
+	background: #fff;
+}
+
+.tags:hover, .close:hover{
+	background: #ddd;
+	cursor: pointer;
+}
+
+.tags{
+	border-radius: 3px 0px 0px 3px;
+}
+ul{
+margin:0;
+padding:0;
+}
+li {
+margin:0;
+padding:0;
+}
+
+
+/* additional icon images */
+.ui-icon-tag{
+	background-image: url("../images/14-tag.png");
+	background-size: 18px 18px;
+}
+.ui-icon-tags{
+	background-image: url("../images/15-tags.png");
+	background-size: 70%;
+	background-position:2px ;
+}
+.ui-icon-photos{
+	background-image: url("../images/42-photos.png");
+	background-size: 70%;
+	background-position:2px ;
+}
+.ui-icon-upload{
+	background-image: url("../images/167-upload-photo.png");
+	background-size: 80%;
+	background-position:2px ;
+}
+.ui-icon-upload1{
+	background-image: url("../images/168-upload-photo-2.png");
+	background-size: 18px 18px;
+}
+.ui-icon-camera{
+	background-image: url("../images/86-camera.png");
+	background-size: 80%;
+	background-position:2px ;
+}
+.ui-icon-email{
+	background-image: url("../images/18-envelope.png");
+	background-size: 80%;
+	background-position:2px ;
+}

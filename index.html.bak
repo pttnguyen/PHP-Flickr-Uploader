@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
@@ -5,11 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1"> 
     <title>Flickoader</title>
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.css">
-	<link rel="stylesheet" href="./css/style.css">
-	<!-- JavaScript HTML requirements -->
+    <!-- JavaScript HTML requirements -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 	<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
-	<script src="./js/script.js"></script>
 </head>
 
 <body>
@@ -103,7 +102,7 @@ Questions arise as to the application of copyright law. How does it, for example
 		<h1>Flicker Tag Search</h1>
 		<form id="form-flickr">
 			<label for="form-flickr-keyword">Enter a keyword:</label>
-			<input type="text" id="form-flickr-keyword" name="form-flickr-keyword" value="" />
+			<input type="text" id="form-flickr-keyword" name="form-flickr-keyword" value="vellore" />
 			<input type="submit" id="form-flickr-submit" value="Submit" />
 		</form>
 		<ul id="tag-list"></ul>
