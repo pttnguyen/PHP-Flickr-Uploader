@@ -18,6 +18,8 @@ function getTags(keyWord) {
         len = tagList1.length;
 
         $('.tag').remove();
+        $('#tag-list .ui-block-a').remove();
+        $('#tag-list .ui-block-b').remove();
 
         for (var i = 0; i < 10; i++)
         {
