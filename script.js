@@ -48,6 +48,40 @@ $(document).ready(function() {
         return false;
     });
 
+    $("#form-flickr-keyword").keyup(function(){
+        console.log($("#form-flickr-keyword").val());
+        // set initial variables
+    var keyWord = $("#form-flickr-keyword").val();
+    var tagList1 = [];
+    var tagss = [];
+
+    var apiKey = '8feb459f9cd322658556e3a761867c46';
+
+    //http://api.flickr.com/services/rest/?method=flickr.tags.getRelated&api_key=8feb459f9cd322658556e3a761867c46&tag=london
+    $.getJSON('http://api.flickr.com/services/rest/?method=flickr.tags.getRelated&api_key=' + apiKey + '&tag=' + keyWord + '&format=json&nojsoncallback=1', function(json) {
+        //alert("callback executed as response recieved");
+        $(json).each(function(index) {
+
+        tagList1.push(this.tags.tag);
+
+        });
+
+        tagList1 = tagList1[0];
+        len = tagList1.length;
+
+        $('.tag').remove();
+
+        for (var i = 0; i < tagList1.length; i++)
+        {
+            tagss.push(tagList1[i]._content);
+
+            $('#tag-list').append('<li class="tag close'+i+'"><span class="tags">' + tagss[i] + '</span><span class="close close'+i+'">x</span></li>');
+        }
+        $('.tag').draggable({revert: true});
+
+    });
+    });
+
     $('#upload').droppable({
                     accept: 'li',
                     drop: function(event, ui) {
@@ -62,16 +96,7 @@ $(document).ready(function() {
                     }
                 });
 
-    document.getElementById('files').addEventListener('change', handleFileSelect, false);
-
-
-    
-
 });
-
-$('#files').live("change", function(event){
-        handleFileSelect;
-    });
 
 $(".close").live("click", function(event){
     var cls = $(this).attr('class');
