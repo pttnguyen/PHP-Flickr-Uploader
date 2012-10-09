@@ -19,7 +19,7 @@ function getTags(keyWord) {
 
         $('.tag').remove();
 
-        for (var i = 0; i < 10; i++)
+        for (var i = 0; i < tagList1.length; i++)
         {
 			if (i%2 ===0)	{
 			            $('#tag-list').append('<div class="ui-block-a"><li class="tag close'+i+'"><span class="tags">' +tagList1[i]._content + '</span></li></div>');

@@ -9,7 +9,7 @@ body{
 	padding: 1px 5px 1px 5px;
 	border-radius: 5px;
 	color: #000;
-	background: #eee;
+	background: #fff;
 }
 #load .ui-block-a{
 	width:85%;
