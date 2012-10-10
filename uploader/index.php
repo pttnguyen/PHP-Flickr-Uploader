@@ -32,7 +32,7 @@ if($_POST){
      }
 } 
 
-function uploadPhoto($path, $title) {
+function uploadPhoto($path, $title, $description, $tags) {
     $apiKey = "8feb459f9cd322658556e3a761867c46";
     $apiSecret = "b23a12330334c320";
     $permissions  = "write";
