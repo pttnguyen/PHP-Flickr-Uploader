@@ -1,0 +1,105 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+    <title>Flickoader</title>
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.css">
+	<link rel="stylesheet" href="./css/style.css">
+	<!-- JavaScript HTML requirements -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+	<script src="./js/script.js"></script>
+</head>
+
+<body>
+<!-- Uploader -->
+<div data-role="page" id="uploader">
+    <header data-role="header" data-position="fixed">
+        <h1>Floader</h1>
+		<p><a href="#setting" data-role="button" data-icon="info" data-mini="true" data-theme="a"  data-iconpos="notext" class="ui-btn-right">Info</a></p>
+    </header>    
+    <section data-role="content">
+		<form id="form-flickr" data-ajax="false">
+						<h3>Upload Photo</h3>
+				<div id="upload_file_name">
+						<div id="file">
+							<input data-role="button" data-icon="upload2" data-mini="true" data-theme="b" type="file" name="file">
+						</div>
+						<!-- Control Inputs -->
+						<div id="load" class="ui-grid-a">
+								<div class="ui-block-a"><input data-mini="true" data-theme="b" type="text" id="form-flickr-keyword" name="form-flickr-keyword" placeholder="keyword" /></div>
+								<div class="ui-block-b"><input data-role="button" data-icon="tags" data-iconpos="notext"data-mini="true" data-theme="d" type="submit" id="form-flickr-submit" /></div>
+						</div>
+				</div>
+				<div id="suggest_tags" data-role="collapsible" data-mini="true"  data-theme="c" data-content-theme="b" data-iconpos="right">
+						<h3>Suggested Tags</h3>
+						<!-- Tags-list -->
+						<ul id="tag-list" class="ui-grid-a"></ul>
+				</div>
+				<!-- Upload button -->
+				<p><a href="#" data-role="button"  data-icon="upload" data-theme="a" data-iconpos="top"> Upload Photo</a></p>
+				<!-- Preview -->
+				<div id="preview" >
+				</div>
+		</form>
+
+	</section>       
+    <footer data-role="footer" data-position="fixed">
+        <div data-role="navbar">
+		<ul>
+			<li><a href="#uploader" data-icon="camera" data-theme="a" class="ui-btn-active ui-state-persist" >Uploader</a></li>
+			<li><a href="#photostream"  data-icon="photos" data-theme="a" >Photostream</a></li>
+		</ul>
+		</div>
+	</footer>
+</div>
+			<!-- Tags-list -->
+<div data-role="page" id="photostream">
+    <header data-role="header" data-position="fixed">
+        <h1>Floader</h1>
+		<p><a href="#setting" data-role="button" data-icon="info" data-mini="true" data-theme="a"  data-iconpos="notext" class="ui-btn-right">Info</a></p>
+    </header>      
+    <section data-role="content">
+		<h3>Photostream</h3>	
+        <ul data-role="listview" data-split-icon="gear" data-inset="true">
+            <li>
+                <a href="#toobin">
+                    <h4>Jeffrey Toobin<br>Black Robed Secrets</h4>
+                    <h4>October 19, 2011</h4>                   
+                </a>
+                <a href="#buytix" data-rel="dialog" data-transition="pop">Buy Tickets</a>
+            </li>
+        </ul>
+    </section>       
+    <footer data-role="footer" data-position="fixed">
+        <div data-role="navbar">
+		<ul>
+			<li><a href="#uploader" data-icon="camera" data-theme="a"  >Uploader</a></li>
+			<li><a href="#photostream"  data-icon="photos" data-theme="a" class="ui-btn-active ui-state-persist">Photostream</a></li>
+		</ul>
+		</div>
+	</footer>
+</div>
+
+<div data-role="dialog" id="setting">
+    <header data-role="header" data-position="fixed">
+        <h1>About Us</h1>
+    </header>      
+    <section data-role="content" style="text-align:center;">
+        <strong>Flickr ID</strong><br>
+        <a href="#">Public_iolab</a><br><br>        
+        <strong>Developer Info</strong><br>
+        <a href="#">Chan,</a>
+		<a href="#"> Haroon,</a>
+		<a href="#"> Peter</a><br><br>        
+        <div class="ui-bar">
+        	<a href="#contacus" data-icon="email" data-mini="true" data-theme="a">Contact Us</a>
+        </div>
+    </section>
+	</div>
+</body>
+</html>
+
+

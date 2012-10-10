@@ -37,7 +37,7 @@ $(document).ready(function() {
 
     var len;
 
-    $("#form-flickr").on("submit", function(keyWord) {
+    $("#form-flickr").keyup(function(keyWord) {
     	var keyWord = $("#form-flickr-keyword").val();
     	getTags(keyWord);
 
@@ -59,10 +59,6 @@ $(document).ready(function() {
                 });
 
     document.getElementById('files').addEventListener('change', handleFileSelect, false);
-
-
-    
-
 });
 
 $('#files').live("change", function(event){
