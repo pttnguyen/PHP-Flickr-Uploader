@@ -1,3 +1,44 @@
+$("#tag-list .tags").live("click", function(){
+	console.log($(this).attr('name'));
+	 var clicked_tag = $(this).attr('name');
+	 var exist_flag =false;
+	//select
+	if ($(this).hasClass('unselected')){
+		// prevent duplication
+		$('#tag-for-input li span').each(function(){
+				if ($(this).attr('name') == clicked_tag){
+						exist_flag=true;
+				}
+		});
+		if (!exist_flag){
+			$('#tag-for-input').append('<li class="tag close" ><span name="'+$(this).attr('name')+'" class="tags unselected">'+$(this).attr('name')+'</li>');
+		}
+		$(this).removeClass('unselected');
+		$(this).addClass('selected');
+	}
+	//unselect
+	else if ($(this).hasClass('selected')){
+		// remove unselected tag
+		$('#tag-for-input li span').each(function(){
+				if ($(this).attr('name') == clicked_tag){
+					$(this).parent().remove();
+				}
+		});
+		$(this).removeClass('selected');
+		$(this).addClass('unselected');
+	}
+	// save posted tags in taglist array
+	var flag=false;
+	$('#store-tags').val('');
+	$('#tag-for-input li span').each(function(){
+			if (flag){
+			$('#store-tags').val($('#store-tags').val() + ',');
+			}
+			$('#store-tags').val($('#store-tags').val() + $(this).attr('name'));
+				flag=true;
+	});
+});
+
 function getTags(keyWord) {
 
 	// set initial variables
@@ -17,68 +58,24 @@ function getTags(keyWord) {
         tagList1 = tagList1[0];
         len = tagList1.length;
 
-        $('.tag').remove();
-        $('#tag-list .ui-block-a').remove();
-        $('#tag-list .ui-block-b').remove();
+        $('#tag-list .tag').remove();
+		$('#tag-list').append('<li class="tag close"><span name="'+keyWord+'" class="tags unselected">' +keyWord + '</span></li>');
 
         for (var i = 0; i < 10; i++)
         {
-			if (i%2 ===0)	{
-			            $('#tag-list').append('<div class="ui-block-a"><li class="tag close'+i+'"><span class="tags">' +tagList1[i]._content + '</span></li></div>');
-			}else{
-			            $('#tag-list').append('<div class="ui-block-b"><li class="tag close'+i+'"><span class="tags">' +tagList1[i]._content + '</span></li></div>');
-			}
+            $('#tag-list').append('<li class="tag close'+i+'"><span name="'+tagList1[i]._content+'" class="tags unselected">' +tagList1[i]._content + '</span></li>');
         }
-        $('.tag').draggable({revert: true});
-
     });
-    	    
 }
 
-$(document).ready(function() {
 
+$(document).ready(function() {
     var len;
 
     $("#form-flickr").keyup(function(keyWord) {
     	var keyWord = $("#form-flickr-keyword").val();
     	getTags(keyWord);
-
+		$('#suggest_tags').attr("data-collapsed","false");
         return false;
     });
-
-    $('#upload').droppable({
-                    accept: 'li',
-                    drop: function(event, ui) {
-                        $(ui.draggable).css({top: '0px', left: '0px'}).appendTo('#upload ul');
-                    }
-                });
-
-    $('#load').droppable({
-                    accept: 'li',
-                    drop: function(event, ui) {
-                        $(ui.draggable).css({top: '0px', left: '0px'}).appendTo('#load ul');
-                    }
-                });
-
-    document.getElementById('files').addEventListener('change', handleFileSelect, false);
 });
-
-$('#files').live("change", function(event){
-        handleFileSelect;
-    });
-
-$(".close").live("click", function(event){
-    var cls = $(this).attr('class');
-    var temp;
-    for (var i = 0; i < len; i++)
-        {
-            if (cls.indexOf('close' + i)>=0)
-                temp = i;
-        }
-    //alert(temp);
-    $('.close' + temp).remove();
-    return false;
-});
-
-
-

@@ -1,5 +1,5 @@
 body{
-	overflow:hidden;
+	overflow:auto;
 }
 #upload_file_name{
 	border-top: 1px solid #ccc;
@@ -11,33 +11,21 @@ body{
 	color: #000;
 	background: #eee;
 }
-#load .ui-block-a{
-	width:85%;
-}
-#load .ui-block-b{
-	width:15%;
-	float:right;
-}
-#tag-list .ui-block-a{
-	width:50%;
-}
-#tag-list .ui-block-b{
-	width:50%;
-	float:right;
-}
-#tag-list{
-}
+
+#load { margin-left: 10px;margin-right: 10px; padding: 3px;} 
+
 #form-flickr{
 	overflow:hidden;
 	padding: 7px 0 0 5px;	
 }
 .tag{
-	margin: 5px;
-	width: 150px;
+    width: auto; 
+    margin-right: 5px;
+	margin-top:5px;
 	display: inline-block;	
 }
 
-.tags, .close{
+.tags, .unselected{
 	border-top: 1px solid #ccc;
 	border-left: 1px solid #ccc;
 	border-bottom: 1px solid #ccc;
@@ -46,12 +34,23 @@ body{
 	color: #000;
 	background: #fff;
 }
+.selected{
+	color: white;
+	background: blue;
+}
 
-.tags:hover, .close:hover{
+#tag-list .tags:hover, .close:hover{
 	background: #ddd;
 	cursor: pointer;
 }
-
+#tag-for-input .unselected{
+	padding: 1px 5px 1px 5px;
+	color: black;
+	background: transparent;
+}
+#store-tags{
+	display:none;
+}
 .tags{
 	border-radius: 3px 0px 0px 3px;
 }
