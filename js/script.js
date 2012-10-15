@@ -79,3 +79,45 @@ $(document).ready(function() {
         return false;
     });
 });
+
+
+function downloadImg() {
+    $.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?",
+        {
+            ids : "88261501@N05",
+            tags: "",
+            tagmode: "any",
+            format: "json",
+        },
+
+        function(data){
+          $.each(data.items, function(i,item){
+           
+         $("<img/>").attr({ 
+          src: (item.media.m).replace("_m.jpg", "_s.jpg"),
+          href: "http://google.com",
+          alt: item.title,
+        }).appendTo(".gallery").wrap("<div class='thumb'><a rel='external' href=\""+item.media.m+"\"></a></div>")  ;
+
+            if ( i == 100 ) return false;
+          });
+		  
+		}
+	
+    );
+}
+
+$(document).ready(function() {
+        downloadImg();
+		$('.stream a').colorbox();
+
+				(function(window, $, PhotoSwipe)
+		{
+				$(".gallery a").photoSwipe(
+				{
+					enableMouseWheel: false,
+					enableKeyboard: false
+				});
+		}(window, window.jQuery, window.Code.PhotoSwipe));
+		
+		});
