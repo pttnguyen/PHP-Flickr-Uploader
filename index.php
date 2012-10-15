@@ -1,11 +1,12 @@
 <?php
-
+session_start();  
 //Include phpFlickr
 require_once("phpFlickr/phpFlickr.php");
+include 'config.php';
 
 $error=0;
 $f = null;
-if($_POST){
+if (!empty($_POST['submit-photo'])) {
     /* Check if both name and file are filled in */
     if(!$_POST['name'] || !$_FILES["file"]["name"]["tags"]){
         $error=1;
@@ -33,11 +34,33 @@ if($_POST){
 } 
 
 function uploadPhoto($path, $title, $description, $tags) {
-    $apiKey = "8feb459f9cd322658556e3a761867c46";
-    $apiSecret = "b23a12330334c320";
-    $permissions  = "write";
-    $token        = "72157631733392573-0fd762003e9b7f1b";
 
+    $userName = $_SESSION["user-name"];
+    if($userName == "")
+    {
+        $userName = "ischoold";
+    }
+    $userID = $_SESSION["user-id"];
+    if($userID == "")
+    {
+        $userID = "88261501@N05";
+    }
+    $apiKey = $_SESSION["api-key"];
+    if($apiKey == "")
+    {
+        $apiKey = "8feb459f9cd322658556e3a761867c46";
+    }
+    $apiSecret = $_SESSION["api-secret"];
+    if($apiSecret == "")
+    {
+        $apiSecret = "b23a12330334c320";
+    }
+    $token = $_SESSION["token"];
+    if($token == "")
+    {
+        $token = "72157631733392573-0fd762003e9b7f1b";
+    }
+    $permissions  = "write";
     $f = new phpFlickr($apiKey, $apiSecret, true);
     $f->setToken($token);
     return $f->async_upload($path, $title, $description, $tags);
@@ -70,7 +93,21 @@ function uploadPhoto($path, $title, $description, $tags) {
 						<h3>Upload Photo</h3>
 				<?php
 				if (isset($_POST['name']) && $error==0) {
-					echo "  <h2>Your file has been uploaded to <a href='http://www.flickr.com/photos/88261501@N05/' target='_blank'>ischoold's photo stream</a></h2>";
+                    $userID = $_SESSION["user-id"];
+                    $userName = $_SESSION["user-name"];
+                    $userName = $_SESSION["user-name"];
+                    if($userName == "")
+                    {
+                        $userName = "ischoold";
+                    }
+                    $userID = $_SESSION["user-id"];
+                    if($userID == "")
+                    {
+                        $userID = "88261501@N05";
+                    }
+					//echo "  <h2>Your file has been uploaded to <a href='http://www.flickr.com/photos/88261501@N05/' target='_blank'>ischoold's photo stream</a></h2>";
+                    echo "  <h2>Your file has been uploaded to <a href='http://www.flickr.com/photos/$userID/' target='_blank'>$userName's photo stream</a></h2>";
+                    session_unset();
 				}else {
 					if($error == 1){
 						echo "  <font color='red'>Please provide both name and a file</font>";
@@ -97,7 +134,7 @@ function uploadPhoto($path, $title, $description, $tags) {
 							</div>
 							<p>Picture: <input data-role="button" data-icon="upload2" data-mini="true" data-theme="b" type="file" name="file"></p>
 							<!-- Upload button -->
-						   <p><input type="submit" value="Upload Photo" data-role="button"  data-icon="upload" data-theme="a" data-iconpos="top"></p>
+						   <p><input type="submit" name="submit-photo" value="Upload Photo" data-role="button"  data-icon="upload" data-theme="a" data-iconpos="top"></p>
 					</div>
 				</div>
 	</form>
@@ -148,7 +185,22 @@ function uploadPhoto($path, $title, $description, $tags) {
     </header>      
     <section data-role="content" style="text-align:center;">
         <strong>Flickr ID</strong><br>
-        <a href="#">ischoold</a><br><br>        
+        <a href="#">ischoold</a><br><br> 
+
+        <!--Haroon-->
+        <form id="form-login" data-ajax="false" method="post" accept-charset="utf-8" enctype='multipart/form-data'>
+            <div id="Custom_login" style="text-align:left;" data-role="collapsible" data-collapsed="true" data-mini="true"  data-theme="c" data-content-theme="b" data-iconpos="right">
+                <h3>Custom Login</h3>
+                <p>User Name <input data-mini="true" data-theme="b" type="text" name="user-name"></p>
+                <p>UserID (nsid) <input data-mini="true" data-theme="b" type="text" name="user-id"></p>
+                <p>ApiKey<input data-mini="true" data-theme="b" type="text"name="api-key"></p>
+                <p>ApiSecret<input data-mini="true" data-theme="b" type="text" name="api-secret"/></p>
+                <p>Token<input data-mini="true" data-theme="b" type="text" name="token"/></p>
+                <p><input type="submit" name= "submit-login" value="Submit" data-role="button"  data-icon="upload" data-theme="a" data-iconpos="top"></p>
+            </div>
+        </form>
+        <!--Haroon-->
+
         <strong>Developer Info</strong><br>
         <a href="#">Chan,</a>
 		<a href="#"> Haroon,</a>
