@@ -17,8 +17,8 @@ if (!empty($_POST['submit-photo'])) {
         }else if($_FILES["file"]["type"] != "image/jpg" && $_FILES["file"]["type"] != "image/jpeg" && $_FILES["file"]["type"] != "image/png" && $_FILES["file"]["type"] != "image/gif"){
             /* Filter all bad file types */
             $error = 3;
-        }else if(intval($_FILES["file"]["size"]) > 525000){
-            /* Filter all files greater than 512 KB */
+        }else if(intval($_FILES["file"]["size"]) > 5250000){
+            /* Filter all files greater than 5 MB */
             $error = 4;
         }else{
             $dir= dirname($_FILES["file"]["tmp_name"]);
@@ -142,16 +142,36 @@ $(document).ready(function() {
 </head>
 
 <body>
+
+<!-- Splash -->
+<div data-role="page" id="welcome" class='type-interior ui-page ui-body-c ui-page-header-fixed ui-page-footer-fixed'>
+    <section data-role="content">
+	
+				<!-- Content -->
+			<div id="content" data-role="content" data-scrollz="pull">
+	
+	<div style='width: 100%; height: 100%; font-size: 100%; text-align: center; margin: auto;'>
+	<div style='font-size: 180%;'>Welcome to</div>
+	<a href="#uploader" data-prefetch="true" data-transition="slidedown" class="ui-btn ui-btn-hover-d ui-btn-up-d" style='font-size: 150%; padding: 10px;'><font color='#FF0084'>F</font><font color='#1057AE'>load</font><font color='#FF0084'>r</font></a>
+	<div style='font-size: 100%;'>A Tagging, Uploading, and Photo Pooling Application for HTML5-Compatible Devices</div>
+	</div>
+			</div>
+	
+	</section>
+</div>
+
 <!-- Uploader -->
-<div data-role="page" id="uploader">
+<div data-role="page" id="uploader" class='type-interior ui-page ui-body-c ui-page-header-fixed ui-page-footer-fixed'>
     <header data-role="header" data-tap-toggle="false" data-position="fixed">
         <h1>Uploader</h1>
 
 		<a href="#welcome" data-transition="slideup" class="ui-btn ui-btn-inline ui-btn-hover-d ui-btn-up-d"><span class="ui-btn-inner"><span class="ui-btn-text"><font color='#FF0084'>F</font><font color='#1057AE'>load</font><font color='#FF0084'>r</font></span></span></a>
 		
 		<p><a href="#setting" data-role="button" data-icon="info" data-mini="true" data-theme="a"  data-iconpos="notext" class="ui-btn-right">Info</a></p>
-    </header> 
-    <section data-role="content">
+    </header>    
+    <section data-role="content" data-theme="a" class="ui-content ui-body-a">
+		
+		<div style='min-height: 500px; height: 100%;'>
 		<form id="form-flickr" data-ajax="false"  method="post" accept-charset="utf-8" enctype='multipart/form-data'>
 						<!-- <h3>Upload Photo</h3> //-->
 				<?php
@@ -179,7 +199,7 @@ $(document).ready(function() {
 					}else if($error == 3){
 						echo "  <font color='red'>Please upload JPG, JPEG, PNG or GIF image ONLY</font>";
 					}else if($error == 4){
-						echo "  <font color='red'>Image size greater than 512KB, Please upload an image under 512KB</font>";
+						echo "  <font color='red'>Image size greater than 5MB, Please upload an image under 5MB</font>";
 					}
 				?>
 				<div id="upload_file_name">
@@ -197,10 +217,11 @@ $(document).ready(function() {
 							</div>
 							<p>Picture: <input data-role="button" data-icon="upload2" data-mini="true" data-theme="b" type="file" name="file"></p>
 							<!-- Upload button -->
-						   <p><input type="submit" name="submit-photo" value="Upload Photo" data-role="button"  data-icon="upload" data-theme="a" data-iconpos="top"></p>
+						   <p><input type="submit" value="Upload Photo" data-role="button"  data-icon="upload" data-theme="a" data-iconpos="top"></p>
 					</div>
 				</div>
 	</form>
+	</div>
 <?php
 				}
 ?>
@@ -243,7 +264,7 @@ $(document).ready(function() {
 </div>
 
 <div data-role="dialog" id="setting">
-    <header data-role="header" data-position="fixed">
+    <header data-role="header" data-tap-toggle="false" data-position="fixed">
         <h1>About Us</h1>
     </header>      
     <section data-role="content" style="text-align:center;">
