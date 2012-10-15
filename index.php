@@ -33,6 +33,19 @@ if (!empty($_POST['submit-photo'])) {
      }
 } 
 
+$userID = $_SESSION["user-id"];
+$userName = $_SESSION["user-name"];
+$userName = $_SESSION["user-name"];
+if($userName == "")
+{
+	$userName = "ischoold";
+}
+$userID = $_SESSION["user-id"];
+if($userID == "")
+{
+	$userID = "88261501@N05";
+}
+
 function uploadPhoto($path, $title, $description, $tags) {
 
     $userName = $_SESSION["user-name"];
@@ -130,21 +143,9 @@ function uploadPhoto($path, $title, $description, $tags) {
 						<!-- <h3>Upload Photo</h3> //-->
 				<?php
 				if (isset($_POST['name']) && $error==0) {
-                    $userID = $_SESSION["user-id"];
-                    $userName = $_SESSION["user-name"];
-                    $userName = $_SESSION["user-name"];
-                    if($userName == "")
-                    {
-                        $userName = "ischoold";
-                    }
-                    $userID = $_SESSION["user-id"];
-                    if($userID == "")
-                    {
-                        $userID = "88261501@N05";
-                    }
 					
                     echo "<h3>Your file has been uploaded to <a href='http://www.flickr.com/photos/$userID/' target='_blank'>$userName's photo stream</a>.</h3> <br><a href='http://www.flickr.com/photos/$userID/' target='_blank'>View Photos</a> | <a href='#' onClick='window.location.reload(); return false;'>Upload Another</a>";
-                    session_unset();
+                    // session_unset();
 				}else {
 					if($error == 1){
 						echo "  <font color='red'>Please provide both name and a file</font>";
@@ -204,12 +205,115 @@ function uploadPhoto($path, $title, $description, $tags) {
     <section data-role="content" data-theme="a" class="ui-content ui-body-a">
 		<!-- <h3>Photostream</h3> //-->
 		
-		<div class="gallery" style='height: 530px;'>
+		<div style='height: 530px;'>
+
+		<!-- <div class="gallery">
+		
+		</div> //-->
+		
+		
+<div id="thumbs">
+<?php
+
+// For paging the thumbnails, get the page we are on
+// if there isn't one - we are on page 1
+$page = isset($_GET['page']) ? $_GET['page'] : 1;
+
+// Fire up the phpFlickr class
+$f = new phpFlickr($key);
+
+// phpFlickr needs a cache folder
+// in this case we have a writable folder on the root of our site, with permissions set to 777
+$f->enableCache("fs", "cache");
+
+//returns an array
+$result = $f->people_findByUsername($username);
+
+// grab our unique user id from the $result array
+$nsid = $result["id"];
+
+// Get the user's public photos and show 21 per page
+//$page at the end specifies which page to start on, that's the page number ($page) that we got at the start
+$photos = $f->people_getPublicPhotos($nsid, NULL, NULL, 21, $page);
+
+// Some bits for paging
+$pages = $photos[photos][pages]; // returns total number of pages
+$total = $photos[photos][total]; // returns how many photos there are in total
+
+	foreach ($photos['photos']['photo'] as $photo) {
+   
+         echo "<a href=\"" . $f->buildPhotoURL($photo, "full") . "\" title=\"View $photo[title]\">";
+	 // this next line uses buildPhotoURL to construct the location of our image 
+	   echo "<img alt=\"$photo[title]\" ".
+            "src=\"" . $f->buildPhotoURL($photo, "Square") . "\" width=\"75\" height=\"75\" />";
+        echo "</a>\n";
+
+} // end loop
+
+?>
+</div><!-- end thumbs -->
+
+<div style='clear: both;'></div>
+
+<!-- Paging -->
+<p id="nav">
+<?php
+// Some simple paging code to add Prev/Next to scroll through the thumbnails
+$back = $page - 1; 
+$next = $page + 1; 
+
+if($page > 1) { 
+echo "<a href='?page=$back'>&laquo; <strong>Prev</strong></a>"; 
+} 
+// if not last page
+if($page != $pages) { 
+echo "<a href='?page=$next'><strong>Next</strong> &raquo;</a>";} 
+?>
+</p>
+
+<?php
+// a quick bit of info about where we are in the gallery
+echo"<p>Page $page of $pages</p>";
+echo"<p class=\"note\">$total photos in the gallery</p>";
+
+?>
+		
+		<div style='clear: both;'></div>
+	<?php 					
+	echo "<h4><a style='color: white;' href='http://www.flickr.com/photos/$userID/' target='_blank'>View All</a> - $userName's Photo Stream</h3>"; 
+	?>
 		
 		</div>
 		
+		
+		
 
     </section>       
+    <footer data-role="footer" data-tap-toggle="false" data-position="fixed">
+        <div data-role="navbar">
+		<ul>
+			<li><a href="#uploader" data-transition="slide" data-icon="camera" data-theme="a" >Uploader</a></li>
+			<li><a href="#photostream" data-transition="slide" data-direction="reverse" data-icon="photos" data-theme="a" class="ui-btn-active ui-state-persist">Photostream</a></li>
+		</ul>
+		</div>
+	</footer>
+</div>
+
+<div data-role="page" id="success" class='type-interior ui-page ui-body-c ui-page-header-fixed ui-page-footer-fixed'>
+    <header data-role="header" data-tap-toggle="false" data-position="fixed">
+        <h1>Success!</h1>
+
+		<a href="#welcome" data-transition="slideup" class="ui-btn ui-btn-inline ui-btn-hover-d ui-btn-up-d"><span class="ui-btn-inner"><span class="ui-btn-text"><font color='#FF0084'>F</font><font color='#1057AE'>load</font><font color='#FF0084'>r</font></span></span></a>
+		
+		<p><a href="#setting" data-role="button" data-icon="info" data-mini="true" data-theme="a"  data-iconpos="notext" class="ui-btn-right">Info</a></p>
+    </header>  
+    <section data-role="content" data-theme="a" class="ui-content ui-body-a">
+	
+	<?php 		
+	echo "<h3>Your file has been uploaded to <a href='http://www.flickr.com/photos/$userID/' target='_blank'>$userName's photo stream</a>.</h3> <br><a href='http://www.flickr.com/photos/$userID/' target='_blank'>View Photos</a> | <a href='#' onClick='window.location.reload(); return false;'>Upload Another</a>"; 
+	?>
+	
+	</section>
     <footer data-role="footer" data-tap-toggle="false" data-position="fixed">
         <div data-role="navbar">
 		<ul>

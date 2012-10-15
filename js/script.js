@@ -109,15 +109,4 @@ function downloadImg() {
 
 $(document).ready(function() {
         downloadImg();
-		$('.stream a').colorbox();
-
-				(function(window, $, PhotoSwipe)
-		{
-				$(".gallery a").photoSwipe(
-				{
-					enableMouseWheel: false,
-					enableKeyboard: false
-				});
-		}(window, window.jQuery, window.Code.PhotoSwipe));
-		
-		});
+	});

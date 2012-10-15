@@ -100,13 +100,12 @@ padding:0;
 }
 
 
-.thumb {
+.thumb, #thumbs a img {
 float: left;
-margin-right: 2px;
+margin-right: 5px;
 margin-bottom: 5px;
-width: 64px;
-height: 64px;
-margin-left: 5px;
+width: 67px;
+height: 67px;
 border: 1px solid #DDD;
 overflow: hidden;
 }
@@ -115,9 +114,9 @@ overflow: hidden;
 
 }
 
-.gallery {
-margin-left: -9px;
-margin-top: -4px;
+.gallery, #thumbs {
+margin-left: -6px;
+margin-top: -6px;
 }
 
 .gallery li {
