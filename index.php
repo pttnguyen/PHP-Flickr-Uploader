@@ -72,25 +72,88 @@ function uploadPhoto($path, $title, $description, $tags) {
 	<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1"> 
     <title>Floader</title>
-    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.css">
+    <link rel="stylesheet" href="./js/jquery.mobile-1.2.0.css">
+	<link rel="stylesheet" href="./css/colorbox.css">
 	<link rel="stylesheet" href="./css/style.css">
 	<!-- JavaScript HTML requirements -->
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
-	<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+
+	<!-- Scrollz CSS -->
+    <link rel="stylesheet" href="./src/jquery.scrollz.css"/>
+        
+    <!-- Scrollz plugin -->
+    <script src="./js/jflickrfeed.min.js"></script>
+    <script src="./js/jquery.colorbox-min.js"></script>
+	
+	<script src="./js/jquery.min.js"></script>
+    <script src="./js/jquery-ui.min.js"></script>
+	<script src="./js/jquery.mobile-1.2.0.min.js"></script>
 	<script src="./js/script.js"></script>
+
+	<link href="photoswipe.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="klass.min.js"></script>
+	<script type="text/javascript" src="code.photoswipe.jquery-3.0.4.min.js"></script>
+	
+	<script type="text/javascript">
+
+function downloadImg() {
+    $.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?",
+        {
+            ids : "88261501@N05",
+            tags: "",
+            tagmode: "any",
+            format: "json",
+        },
+
+        function(data){
+          $.each(data.items, function(i,item){
+           
+         $("<img/>").attr({ 
+          src: (item.media.m).replace("_m.jpg", "_s.jpg"),
+          href: "http://google.com",
+          alt: item.title,
+        }).appendTo(".gallery").wrap("<div class='thumb'><a rel='external' href=\""+item.media.m+"\"></a></div>")  ;
+
+            if ( i == 100 ) return false;
+          });
+		  
+		}
+	
+    );
+}
+
+$(document).ready(function() {
+        downloadImg();
+		$('.stream a').colorbox();
+
+				(function(window, $, PhotoSwipe)
+		{
+				$(".gallery a").photoSwipe(
+				{
+					enableMouseWheel: false,
+					enableKeyboard: false
+				});
+		}(window, window.jQuery, window.Code.PhotoSwipe));
+		
+		});
+
+
+</script>
+
 </head>
 
 <body>
 <!-- Uploader -->
 <div data-role="page" id="uploader">
-    <header data-role="header" data-position="fixed">
-        <h1>Floader</h1>
+    <header data-role="header" data-tap-toggle="false" data-position="fixed">
+        <h1>Uploader</h1>
+
+		<a href="#welcome" data-transition="slideup" class="ui-btn ui-btn-inline ui-btn-hover-d ui-btn-up-d"><span class="ui-btn-inner"><span class="ui-btn-text"><font color='#FF0084'>F</font><font color='#1057AE'>load</font><font color='#FF0084'>r</font></span></span></a>
+		
 		<p><a href="#setting" data-role="button" data-icon="info" data-mini="true" data-theme="a"  data-iconpos="notext" class="ui-btn-right">Info</a></p>
-    </header>    
+    </header> 
     <section data-role="content">
 		<form id="form-flickr" data-ajax="false"  method="post" accept-charset="utf-8" enctype='multipart/form-data'>
-						<h3>Upload Photo</h3>
+						<!-- <h3>Upload Photo</h3> //-->
 				<?php
 				if (isset($_POST['name']) && $error==0) {
                     $userID = $_SESSION["user-id"];
@@ -105,8 +168,8 @@ function uploadPhoto($path, $title, $description, $tags) {
                     {
                         $userID = "88261501@N05";
                     }
-					//echo "  <h2>Your file has been uploaded to <a href='http://www.flickr.com/photos/88261501@N05/' target='_blank'>ischoold's photo stream</a></h2>";
-                    echo "  <h2>Your file has been uploaded to <a href='http://www.flickr.com/photos/$userID/' target='_blank'>$userName's photo stream</a></h2>";
+					
+                    echo "<h3>Your file has been uploaded to <a href='http://www.flickr.com/photos/88261501@N05/' target='_blank'>ischoold's photo stream</a>.</h3> <br><a href='http://www.flickr.com/photos/88261501@N05/' target='_blank'>View Photos</a> | <a href='#' onClick='window.location.reload(); return false;'>Upload Another</a>";
                     session_unset();
 				}else {
 					if($error == 1){
@@ -142,38 +205,38 @@ function uploadPhoto($path, $title, $description, $tags) {
 				}
 ?>
 	</section>       
-    <footer data-role="footer" data-position="fixed">
+    <footer data-role="footer" data-tap-toggle="false" data-position="fixed">
         <div data-role="navbar">
 		<ul>
-			<li><a href="#uploader" data-icon="camera" data-theme="a" class="ui-btn-active ui-state-persist" >Uploader</a></li>
-			<li><a href="#photostream"  data-icon="photos" data-theme="a" >Photostream</a></li>
+			<li class='upload'><a href="#uploader" data-prefetch="true" data-transition="slide" data-icon="camera" data-theme="a" class="ui-btn-active ui-state-persist">Uploader</a></li>
+			<li class='photos'><a href="#photostream" data-prefetch="true" data-transition="slide" data-direction="reverse" data-icon="photos" data-theme="a" >Photostream</a></li>
 		</ul>
 		</div>
 	</footer>
 </div>
 			<!-- Tags-list -->
-<div data-role="page" id="photostream">
-    <header data-role="header" data-position="fixed">
-        <h1>Floader</h1>
+<div data-role="page" id="photostream" class='type-interior ui-page ui-body-c ui-page-header-fixed ui-page-footer-fixed gallery-page'>
+    <header data-role="header" data-tap-toggle="false" data-position="fixed">
+        <h1>Photostream</h1>
+		
+		<a href="#welcome" data-transition="slideup" class="ui-btn ui-btn-inline ui-btn-hover-d ui-btn-up-d"><span class="ui-btn-inner"><span class="ui-btn-text"><font color='#FF0084'>F</font><font color='#1057AE'>load</font><font color='#FF0084'>r</font></span></span></a>
+		
 		<p><a href="#setting" data-role="button" data-icon="info" data-mini="true" data-theme="a"  data-iconpos="notext" class="ui-btn-right">Info</a></p>
-    </header>      
-    <section data-role="content">
-		<h3>Photostream</h3>	
-        <ul data-role="listview" data-split-icon="gear" data-inset="true">
-            <li>
-                <a href="#toobin">
-                    <h4>Jeffrey Toobin<br>Black Robed Secrets</h4>
-                    <h4>October 19, 2011</h4>                   
-                </a>
-                <a href="#buytix" data-rel="dialog" data-transition="pop">Buy Tickets</a>
-            </li>
-        </ul>
+    </header>  
+    <section data-role="content" data-theme="a" class="ui-content ui-body-a">
+		<!-- <h3>Photostream</h3> //-->
+		
+		<div class="gallery" style='height: 500px;'>
+		
+		</div>
+		
+
     </section>       
-    <footer data-role="footer" data-position="fixed">
+    <footer data-role="footer" data-tap-toggle="false" data-position="fixed">
         <div data-role="navbar">
 		<ul>
-			<li><a href="#uploader" data-icon="camera" data-theme="a"  >Uploader</a></li>
-			<li><a href="#photostream"  data-icon="photos" data-theme="a" class="ui-btn-active ui-state-persist">Photostream</a></li>
+			<li><a href="#uploader" data-transition="slide" data-icon="camera" data-theme="a" >Uploader</a></li>
+			<li><a href="#photostream" data-transition="slide" data-direction="reverse" data-icon="photos" data-theme="a" class="ui-btn-active ui-state-persist">Photostream</a></li>
 		</ul>
 		</div>
 	</footer>

@@ -16,7 +16,7 @@ body{
 
 #form-flickr{
 	overflow:hidden;
-	padding: 7px 0 0 5px;	
+	padding: 0px 0 0 5px;	
 }
 .tag{
     width: auto; 
@@ -97,4 +97,33 @@ padding:0;
 	background-image: url("../images/18-envelope.png");
 	background-size: 80%;
 	background-position:2px ;
+}
+
+
+.thumb {
+float: left;
+margin-right: 2px;
+margin-bottom: 5px;
+width: 64px;
+height: 64px;
+margin-left: 5px;
+border: 1px solid #DDD;
+overflow: hidden;
+}
+
+.thumb img {
+
+}
+
+.gallery {
+margin-left: -9px;
+margin-top: -4px;
+}
+
+.gallery li {
+display: inline;
+}
+
+#suggest-tags {
+margin-top: 10px;
 }
