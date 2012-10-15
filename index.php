@@ -96,28 +96,21 @@ function uploadPhoto($path, $title, $description, $tags) {
 	<link rel="stylesheet" href="./css/style.css">
 	<!-- JavaScript HTML requirements -->
 
-	<!-- Scrollz CSS -->
-    <link rel="stylesheet" href="./src/jquery.scrollz.css"/>
-        
-    <!-- Scrollz plugin -->
-    <script src="./js/jflickrfeed.min.js"></script>
-    <script src="./js/jquery.colorbox-min.js"></script>
-	
 	<script src="./js/jquery.min.js"></script>
     <script src="./js/jquery-ui.min.js"></script>
 	<script src="./js/jquery.mobile-1.2.0.min.js"></script>
 	<script src="./js/script.js"></script>
 
-	<link href="photoswipe.css" type="text/css" rel="stylesheet" />
-	<script type="text/javascript" src="klass.min.js"></script>
-	<script type="text/javascript" src="code.photoswipe.jquery-3.0.4.min.js"></script>
+	<link href="./css/photoswipe.css" type="text/css" rel="stylesheet" />
+	<script type="text/javascript" src="./js/klass.min.js"></script>
+	<script type="text/javascript" src="./js/code.photoswipe.jquery-3.0.4.min.js"></script>
 	
 </head>
 
 <body>
 
 <!-- Splash -->
-<div data-role="page" id="welcome" class='type-interior ui-page ui-body-c ui-page-header-fixed ui-page-footer-fixed'>
+<div data-role="page" id="welcome" data-theme="a" class='type-interior ui-page ui-body-a ui-page-header-fixed ui-page-footer-fixed'>
     <section data-role="content">
 	
 				<!-- Content -->
@@ -177,7 +170,7 @@ function uploadPhoto($path, $title, $description, $tags) {
 							
 							<!-- hidden input for tags-->
 							<input type="text" id="store-tags" name="tags"/>
-							<ul id="tag-for-input"></ul>
+							<ul id="tag-for-input" style='display: none;'></ul>
 							
 							<p>Picture: <input data-role="button" data-icon="upload2" data-mini="true" data-theme="b" type="file" name="file"></p>
 							<!-- Upload button -->
@@ -248,7 +241,7 @@ $total = $photos[photos][total]; // returns how many photos there are in total
 
 	foreach ($photos['photos']['photo'] as $photo) {
    
-         echo "<a href=\"" . $f->buildPhotoURL($photo, "full") . "\" data-rel='popup' rel='external' title=\"View $photo[title]\">";
+         echo "<a href=\"" . $f->buildPhotoURL($photo, "full") . "\" target='_blank' rel='external' title=\"View $photo[title]\">";
 	 // this next line uses buildPhotoURL to construct the location of our image 
 	   echo "<img alt=\"$photo[title]\" ".
             "src=\"" . $f->buildPhotoURL($photo, "Square") . "\" width=\"75\" height=\"75\" />";
