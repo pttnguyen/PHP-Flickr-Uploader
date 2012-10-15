@@ -40,6 +40,12 @@ if($userName == "")
 {
 	$userName = "ischoold";
 }
+$username = $_SESSION["user-name"];
+$username = $_SESSION["user-name"];
+if($userName == "")
+{
+	$userName = "ischoold";
+}
 $userID = $_SESSION["user-id"];
 if($userID == "")
 {
@@ -227,7 +233,7 @@ $f = new phpFlickr($key);
 $f->enableCache("fs", "cache");
 
 //returns an array
-$result = $f->people_findByUsername($username);
+$result = $f->people_findByUsername($userName);
 
 // grab our unique user id from the $result array
 $nsid = $result["id"];
@@ -242,7 +248,7 @@ $total = $photos[photos][total]; // returns how many photos there are in total
 
 	foreach ($photos['photos']['photo'] as $photo) {
    
-         echo "<a href=\"" . $f->buildPhotoURL($photo, "full") . "\" title=\"View $photo[title]\">";
+         echo "<a href=\"" . $f->buildPhotoURL($photo, "full") . "\" data-rel='popup' rel='external' title=\"View $photo[title]\">";
 	 // this next line uses buildPhotoURL to construct the location of our image 
 	   echo "<img alt=\"$photo[title]\" ".
             "src=\"" . $f->buildPhotoURL($photo, "Square") . "\" width=\"75\" height=\"75\" />";
