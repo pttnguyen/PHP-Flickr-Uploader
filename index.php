@@ -105,6 +105,15 @@ function uploadPhoto($path, $title, $description, $tags) {
 	<script type="text/javascript" src="./js/klass.min.js"></script>
 	<script type="text/javascript" src="./js/code.photoswipe.jquery-3.0.4.min.js"></script>
 	
+	<script type='text/javascript'>
+	//jQuery version
+$(document).ready(function(){
+
+	var myPhotoSwipe = $("#thumbs a").photoSwipe({ enableMouseWheel: false , enableKeyboard: false });
+
+});
+</script>
+	
 </head>
 
 <body>
@@ -143,8 +152,11 @@ function uploadPhoto($path, $title, $description, $tags) {
 				<?php
 				if (isset($_POST['name']) && $error==0) {
 					
-                    echo "<h3>Your file has been uploaded to <a href='http://www.flickr.com/photos/$userID/' target='_blank'>$userName's photo stream</a>.</h3> <br><a href='http://www.flickr.com/photos/$userID/' target='_blank'>View Photos</a> | <a href='#' onClick='window.location.reload(); return false;'>Upload Another</a>";
+                    echo "<h3>Your file has been uploaded to <a href='#photostream'>$userName's photo stream</a>.</h3> <br><a href='#photostream'>View Photos</a> | <a href='#' onClick='window.location.reload(); return false;'>Upload Another</a>";
                     // session_unset();
+                    // window.location.reload();
+                    	header("Location: success.php");
+                    	
 				}else {
 					if($error == 1){
 						echo "  <font color='red'>Please provide both name and a file</font>";
@@ -158,6 +170,9 @@ function uploadPhoto($path, $title, $description, $tags) {
 				?>
 				<div id="upload_file_name">
 					<div id="load" >
+
+							<p>Picture: <input data-role="button" data-icon="upload2" data-mini="true" data-theme="b" type="file" name="file"></p>
+
 							<p>Name <input data-mini="true" data-theme="b" type="text" name="name" value="" ></p>
 							<p>Description<input data-mini="true" data-theme="b" type="text"name="description" value="" ></p>
 							<p>Tags<input data-mini="true" data-theme="b" type="text" id="form-flickr-keyword"  name="tags-search" placeholder="keyword" /></p>
@@ -170,9 +185,9 @@ function uploadPhoto($path, $title, $description, $tags) {
 							
 							<!-- hidden input for tags-->
 							<input type="text" id="store-tags" name="tags"/>
-							<ul id="tag-for-input" style='display: none;'></ul>
+							<ul id="tag-for-input"></ul>
 							
-							<p>Picture: <input data-role="button" data-icon="upload2" data-mini="true" data-theme="b" type="file" name="file"></p>
+
 							<!-- Upload button -->
 						   <p><input type="submit" name="submit-photo" value="Upload Photo" data-role="button"  data-icon="upload" data-theme="a" data-iconpos="top"></p>
 					</div>
@@ -186,8 +201,8 @@ function uploadPhoto($path, $title, $description, $tags) {
     <footer data-role="footer" data-tap-toggle="false" data-position="fixed">
         <div data-role="navbar">
 		<ul>
-			<li class='upload'><a href="#uploader" data-prefetch="true" data-transition="slide" data-icon="camera" data-theme="a" class="ui-btn-active ui-state-persist">Uploader</a></li>
-			<li class='photos'><a href="#photostream" data-prefetch="true" data-transition="slide" data-direction="reverse" data-icon="photos" data-theme="a" >Photostream</a></li>
+			<li class='upload'><a href="#uploader" data-prefetch="true" data-transition="none" data-icon="camera" data-theme="a" class="ui-btn-active ui-state-persist">Uploader</a></li>
+			<li class='photos'><a href="#photostream" data-prefetch="true" data-transition="none" data-direction="reverse" data-icon="photos" data-theme="a" >Photostream</a></li>
 		</ul>
 		</div>
 	</footer>
@@ -204,7 +219,7 @@ function uploadPhoto($path, $title, $description, $tags) {
     <section data-role="content" data-theme="a" class="ui-content ui-body-a">
 		<!-- <h3>Photostream</h3> //-->
 		
-		<div style='height: 530px;'>
+		<div style='min-height: 530px;'>
 
 		<!-- <div class="gallery">
 		
@@ -233,7 +248,7 @@ $nsid = $result["id"];
 
 // Get the user's public photos and show 21 per page
 //$page at the end specifies which page to start on, that's the page number ($page) that we got at the start
-$photos = $f->people_getPublicPhotos($nsid, NULL, NULL, 21, $page);
+$photos = $f->people_getPublicPhotos($nsid, NULL, NULL, 96, $page);
 
 // Some bits for paging
 $pages = $photos[photos][pages]; // returns total number of pages
@@ -262,11 +277,11 @@ $back = $page - 1;
 $next = $page + 1; 
 
 if($page > 1) { 
-echo "<a href='?page=$back'>&laquo; <strong>Prev</strong></a>"; 
+echo "<a rel='external' href='#photostream?page=$back'>&laquo; <strong>Prev</strong></a>"; 
 } 
 // if not last page
 if($page != $pages) { 
-echo "<a href='?page=$next'><strong>Next</strong> &raquo;</a>";} 
+echo "<a rel='external' href='#photostream?page=$next'><strong>Next</strong> &raquo;</a>";} 
 ?>
 </p>
 
@@ -291,8 +306,8 @@ echo"<p class=\"note\">$total photos in the gallery</p>";
     <footer data-role="footer" data-tap-toggle="false" data-position="fixed">
         <div data-role="navbar">
 		<ul>
-			<li><a href="#uploader" data-transition="slide" data-icon="camera" data-theme="a" >Uploader</a></li>
-			<li><a href="#photostream" data-transition="slide" data-direction="reverse" data-icon="photos" data-theme="a" class="ui-btn-active ui-state-persist">Photostream</a></li>
+			<li><a href="#uploader" data-transition="none" data-icon="camera" data-theme="a" >Uploader</a></li>
+			<li><a href="#photostream" data-transition="none" data-direction="reverse" data-icon="photos" data-theme="a" class="ui-btn-active ui-state-persist">Photostream</a></li>
 		</ul>
 		</div>
 	</footer>
@@ -316,8 +331,8 @@ echo"<p class=\"note\">$total photos in the gallery</p>";
     <footer data-role="footer" data-tap-toggle="false" data-position="fixed">
         <div data-role="navbar">
 		<ul>
-			<li><a href="#uploader" data-transition="slide" data-icon="camera" data-theme="a" >Uploader</a></li>
-			<li><a href="#photostream" data-transition="slide" data-direction="reverse" data-icon="photos" data-theme="a" class="ui-btn-active ui-state-persist">Photostream</a></li>
+			<li><a href="#uploader" data-transition="none" data-icon="camera" data-theme="a" >Uploader</a></li>
+			<li><a href="#photostream" data-transition="none" data-direction="reverse" data-icon="photos" data-theme="a" class="ui-btn-active ui-state-persist">Photostream</a></li>
 		</ul>
 		</div>
 	</footer>
