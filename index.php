@@ -146,7 +146,7 @@ $(document).ready(function(){
     </header>    
     <section data-role="content" data-theme="a" class="ui-content ui-body-a">
 		
-		<div style='min-height: 530px; height: 100%;'>
+		<div style='min-height: 680px; height: 100%;'>
 		<form id="form-flickr" data-ajax="false"  method="post" accept-charset="utf-8" enctype='multipart/form-data'>
 						<!-- <h3>Upload Photo</h3> //-->
 				<?php
@@ -219,7 +219,7 @@ $(document).ready(function(){
     <section data-role="content" data-theme="a" class="ui-content ui-body-a">
 		<!-- <h3>Photostream</h3> //-->
 		
-		<div style='min-height: 530px;'>
+		<div style='min-height: 680px;'>
 
 		<!-- <div class="gallery">
 		
