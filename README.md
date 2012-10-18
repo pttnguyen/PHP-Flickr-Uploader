@@ -4,19 +4,20 @@ Floader - Flickr Pool Uploader & Tagger
 
 Members
 ---
-*Chan Kim
-*Peter Nguyen
-*Haroon Rasheed
+
+* Chan Kim
+* Peter Nguyen
+* Haroon Rasheed
 
 Roles
 ---
-*Chan Kim - 
-*Peter Nguyen - 
-*Haroon Rasheed - 
+* Chan Kim - 
+* Peter Nguyen - 
+* Haroon Rasheed - 
 
 Bugs
 ---
-*Can't change submit photo button for all devices due to security in Android and iOS devices. 
+Can't change submit photo button for all devices due to security in Android and iOS devices. 
 Tried changing the colors using proxy button and click event, but only works on desktop computers.
 
 Sources
