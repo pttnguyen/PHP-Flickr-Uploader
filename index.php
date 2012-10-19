@@ -219,9 +219,7 @@ $(document).ready(function(){
 							<!-- hidden input for tags-->
 							<input type="text" id="store-tags" name="tags"/>
 							<ul id="tag-for-input"></ul>
-							
-							<div id='loader'><img src='images/loading.gif' style='margin: auto; margin-top: 150px;'/></div>
-							
+														
 							<!-- Upload button -->
 						   <p><input type="submit" name="submit-photo" class="loader" value="Upload Photo" data-role="button" onclick="$.mobile.showPageLoadingMsg();" data-icon="upload" data-theme="a" data-iconpos="top"></p>
 					</div>
