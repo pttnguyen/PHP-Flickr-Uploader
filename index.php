@@ -84,6 +84,32 @@ function uploadPhoto($path, $title, $description, $tags) {
     $f->setToken($token);
     return $f->async_upload($path, $title, $description, $tags);
 }
+
+// For paging the thumbnails, get the page we are on
+// if there isn't one - we are on page 1
+$page = isset($_GET['page']) ? $_GET['page'] : 1;
+
+// Fire up the phpFlickr class
+$f = new phpFlickr($key);
+
+// phpFlickr needs a cache folder
+// in this case we have a writable folder on the root of our site, with permissions set to 777
+$f->enableCache("fs", "cache");
+
+//returns an array
+$result = $f->people_findByUsername($userName);
+
+// grab our unique user id from the $result array
+$nsid = $result["id"];
+
+// Get the user's public photos and show 21 per page
+//$page at the end specifies which page to start on, that's the page number ($page) that we got at the start
+$photos = $f->people_getPublicPhotos($nsid, NULL, NULL, 96, $page);
+
+// Some bits for paging
+$pages = $photos[photos][pages]; // returns total number of pages
+$total = $photos[photos][total]; // returns how many photos there are in total
+
 ?>
 <!DOCTYPE HTML>
 <html lang="en">
@@ -210,7 +236,7 @@ $(document).ready(function(){
 			<!-- Tags-list -->
 <div data-role="page" id="photostream" class='type-interior ui-page ui-body-c ui-page-header-fixed ui-page-footer-fixed gallery-page'>
     <header data-role="header" data-tap-toggle="false" data-position="fixed">
-        <h1>Photostream</h1>
+        <h1>Photostream (<?php echo $total ?>)</h1>
 		
 		<a href="#welcome" data-transition="slideup" class="ui-btn ui-btn-inline ui-btn-hover-d ui-btn-up-d"><span class="ui-btn-inner"><span class="ui-btn-text"><font color='#FF0084'>F</font><font color='#1057AE'>load</font><font color='#FF0084'>r</font></span></span></a>
 		
@@ -229,31 +255,6 @@ $(document).ready(function(){
 <div id="thumbs">
 <?php
 
-// For paging the thumbnails, get the page we are on
-// if there isn't one - we are on page 1
-$page = isset($_GET['page']) ? $_GET['page'] : 1;
-
-// Fire up the phpFlickr class
-$f = new phpFlickr($key);
-
-// phpFlickr needs a cache folder
-// in this case we have a writable folder on the root of our site, with permissions set to 777
-$f->enableCache("fs", "cache");
-
-//returns an array
-$result = $f->people_findByUsername($userName);
-
-// grab our unique user id from the $result array
-$nsid = $result["id"];
-
-// Get the user's public photos and show 21 per page
-//$page at the end specifies which page to start on, that's the page number ($page) that we got at the start
-$photos = $f->people_getPublicPhotos($nsid, NULL, NULL, 96, $page);
-
-// Some bits for paging
-$pages = $photos[photos][pages]; // returns total number of pages
-$total = $photos[photos][total]; // returns how many photos there are in total
-
 	foreach ($photos['photos']['photo'] as $photo) {
    
          echo "<a href=\"" . $f->buildPhotoURL($photo, "full") . "\" target='_blank' rel='external' title=\"View $photo[title]\">";
@@ -268,6 +269,7 @@ $total = $photos[photos][total]; // returns how many photos there are in total
 </div><!-- end thumbs -->
 
 <div style='clear: both;'></div>
+
 
 <!-- Paging -->
 <p id="nav">
@@ -287,7 +289,7 @@ echo "<a rel='external' href='#photostream?page=$next'><strong>Next</strong> &ra
 
 <?php
 // a quick bit of info about where we are in the gallery
-echo"<p>Page $page of $pages</p>";
+// echo"<p>Page $page of $pages</p>";
 echo"<p class=\"note\">$total photos in the gallery</p>";
 
 ?>
