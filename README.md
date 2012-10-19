@@ -1,84 +1,56 @@
 Floader - Flickr Pool Uploader & Tagger
 =====
+A Customizable PHP/HTML5 Flickr Photo Uploader and Tagger. It suggests tags, uploads, and pools photos uploaded from HTML5-Compatible
+Devices to an iSchool photo pool, which is customizable if the Flickr user has an API key and token. This is a project
+that integrates with Flickr seamlessly to create a photo pooling application anyone can use. This is important for
+people without Flickr accounts that want to share their photos with friends at a party, for example. Using Floader, they
+can take photos, tag them, and upload them to a photo pool without having to log in.
+
+* Relevant to <strong>People are lazy</strong>: 
+* Attempt to prove Doctorow wrong and show that ease-of-use will help this problem. 
+* Add UI onto Delicious (or some other service) that helpfully suggests tags to make 
+* it easy for you to follow the strict tagging principles you defined in 202. 
+* Or, investigate automatic tagging using the TimesTags API, or some other approach.
 
 
-Members
+Members & Roles
 ---
-
-* Chan Kim
-* Peter Nguyen
-* Haroon Rasheed
-
-Roles
+* Chan Kim (chan@ischool.berkeley.edu)
+    Hacker, Developer, Designer
+    - Created layout, jQuery animation elements, page structure, tagging/suggestion interface, oversaw project development. 
+* Peter Nguyen (ptt.nguyen@ischool.berkeley.edu)
+    Hacker, Developer, Designer
+    - Integrated photostream component, added photoswipe library and touch support for application, added new PHP
+    variables to persist throughout user-session.
+* Haroon Rasheed (haroon@ischool.berkeley.edu)
+    Hacker, Developer
+    - Integrated Flickr Tags API, created login interface from scratch for customizable photostreams/uploading, was able
+    to deliver on anything we asked of. Created PHP session system for persistent logins.
+    
+    
+URL of the repository on github
 ---
-* Chan Kim - 
-* Peter Nguyen - 
-* Haroon Rasheed - 
+https://github.com/pttnguyen/Project-2
+
+Live URL
+---
+http://bit.ly/floader
+
+Browser support
+---
+Tested on Chrome, Firefox, IE7, Safari, Mobile Safari, Android Fennec
+
+Technologies Used
+---
+PHP, jQuery, jQuery Mobile, Javascript, Flickr API, CSS3, HTML5
 
 Bugs
 ---
-Can't change submit photo button for all devices due to security in Android and iOS devices. 
-Tried changing the colors using proxy button and click event, but only works on desktop computers.
+* Can't change submit photo button for all devices due to security in Android and iOS devices. Tried changing the colors using proxy button and click event, but only works on desktop computers.
+* Miscellaneous problems with height due to all screen sizes (should fit up to 1280px screens)
 
 Sources
 ---
-http://www.ravikiranj.net/drupal/201103/code/php/how-create-public-photo-uploader-using-flickr
-
-
-
-
-Example--
-Tember Members responsibility
-·   Brian – Responsible for integration of creator and viewer components via url parameters; introduced 
-unified login dialog with progress bar while saving; sort trails by step number before rendering; git 
-cheerleader;
-·  Peter – Responsible for overall skeleton/template, creator interface for pulling images from flickr and 
-making them draggable into the trail-maker, came up with concept of using trailmaker and Flickr images 
-to create Delicious Trails, jQuery and Javascript used to create graphical design elements, CSS design and 
-templating for Project, created interface for numbering photos added to new trail. 
-·    Sonali Sharma - Responsible for the viewer page, where users enter their username and tag to fetch 
-tagged photos from delicious. Pages created were viewer.html and viewer.js. Used a jquery cover 
-flow to achieve the coverflow gallery affect on the viewer page. (Source code used for reference: 
-jquerycss.com)
-Project Description
-This was an improvement on the Delicious trail maker covered in the lab. In this project we create trails 
-of photographs. The user can fetch the photographs from Flickr and use those photographs to create a 
-trail of their own on Delicious.
-Specific improvements include:
-a) Use of pictures instead of text enhances the richness of the trail
-b) Allow use of multiple sources (tags) for trail creation
-c) Present trails based on step number
-
-This is done in four steps:
-·      STEP 1: Fetch photographs from Flickr. Users can fetch any random photographs or based on a tag.
-·    STEP 2: Make your own trail. The user can then select a group of these photographs to be included in 
-their own trail. They do that by dragging and dropping the photos from Flickr to their trail.
-·     STEP 3: Save Trail. The user then saves the trail by giving it a unique name.
-·   STEP 4: View Trails. The user can view trails either after directly saving their newly created trail or 
-fetching the already saved trails using a username and tag
-Delicious username tested with:
-
-Username Tag
-Sonalisharma Sun asianslike pikachu
-bcavagnolo planets, only-one-image, tag-without-steps
-
-Technologies used on the project
- HTML, Javascript, jQuery, 
-
-URL of the repository on github
-https://github.com/pttnguyen/Project-1
-
-Live URL
-http://people.ischool.berkeley.edu/~bcavagnolo/deflickus/index.html
-
-Browser support
-Tested on Chrome, Firefox, IE7, Safari
-
-Bugs/Quirks
--- coverflow leaves vertical image trails behind as it scrolls images.  Not sure why.
--- When FF focuses on a text box, the placeholder vanishes.
--- Trails with only one image cause unexpected pop-ups on chrome.
--- coverflow completely does not work in IE7.  Not sure why.
--- trail creator fails to save in IE7 without apparent error, and does not redirect to viewer.
--- only links with jpg extension can be displayed, this could be improved by inspecting the url 
-HEAD data
+* http://www.ravikiranj.net/drupal/201103/code/php/how-create-public-photo-uploader-using-flickr
+* http://www.photoswipe.com
+* http://www.flickr.com/services/api/flickr.tags.getRelated.html
