@@ -126,3 +126,11 @@ display: inline;
 #suggest-tags {
 margin-top: 10px;
 }
+
+#loader  {
+width: 100%; 
+
+text-align: center; 
+position: absolute; 
+min-height: 680px;
+}

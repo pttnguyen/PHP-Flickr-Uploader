@@ -136,6 +136,12 @@ $total = $photos[photos][total]; // returns how many photos there are in total
 $(document).ready(function(){
 
 	var myPhotoSwipe = $("#thumbs a").photoSwipe({ enableMouseWheel: false , enableKeyboard: false });
+	
+	$('#loader').hide();
+	
+	$('.loader').click(function() {
+		$.mobile.showPageLoadingMsg("a","Floading ...");
+	});
 
 });
 </script>
@@ -177,23 +183,24 @@ $(document).ready(function(){
 						<!-- <h3>Upload Photo</h3> //-->
 				<?php
 				if (isset($_POST['name']) && $error==0) {
-					
-                    echo "<h3>Your file has been uploaded to <a href='#photostream'>$userName's photo stream</a>.</h3> <br><a href='#photostream'>View Photos</a> | <a href='#' onClick='window.location.reload(); return false;'>Upload Another</a>";
+
+                    // echo "<h3>Your file has been uploaded to <a href='#photostream'>$userName's photo stream</a>.</h3> <br><a href='#photostream'>View Photos</a> | <a href='#' onClick='window.location.reload(); return false;'>Upload Another</a>";
                     // session_unset();
                     // window.location.reload();
                     	header("Location: success.php");
                     	
 				}else {
 					if($error == 1){
-						echo "  <font color='red'>Please provide both name and a file</font>";
+						echo "  <font color='red' style='margin-bottom: 10px;'>Please provide both name and a file</font>";
 					}else if($error == 2) {
-						echo "  <font color='red'>Unable to upload your photo, please try again</font>";
+						echo "  <font color='red' style='margin-bottom: 10px;'>Unable to upload your photo, please try again</font>";
 					}else if($error == 3){
-						echo "  <font color='red'>Please upload JPG, JPEG, PNG or GIF image ONLY</font>";
+						echo "  <font color='red' style='margin-bottom: 10px;'>Please upload JPG, JPEG, PNG or GIF image ONLY</font>";
 					}else if($error == 4){
-						echo "  <font color='red'>Image size greater than 5MB, Please upload an image under 5MB</font>";
+						echo "  <font color='red' style='margin-bottom: 10px;'>Image size greater than 5MB, Please upload an image under 5MB</font>";
 					}
 				?>
+				
 				<div id="upload_file_name">
 					<div id="load" >
 
@@ -213,9 +220,10 @@ $(document).ready(function(){
 							<input type="text" id="store-tags" name="tags"/>
 							<ul id="tag-for-input"></ul>
 							
-
+							<div id='loader'><img src='images/loading.gif' style='margin: auto; margin-top: 150px;'/></div>
+							
 							<!-- Upload button -->
-						   <p><input type="submit" name="submit-photo" value="Upload Photo" data-role="button"  data-icon="upload" data-theme="a" data-iconpos="top"></p>
+						   <p><input type="submit" name="submit-photo" class="loader" value="Upload Photo" data-role="button" onclick="$.mobile.showPageLoadingMsg();" data-icon="upload" data-theme="a" data-iconpos="top"></p>
 					</div>
 				</div>
 	</form>
@@ -346,7 +354,7 @@ echo"<p class=\"note\">$total photos in the gallery</p>";
     </header>      
     <section data-role="content" style="text-align:center;">
         <strong>Flickr ID</strong><br>
-        <a href="#">ischoold</a><br><br> 
+        <a href="<?php echo "http://www.flickr.com/photos/$userID/" ?>" ref='external' target='_blank'><?php echo $userName ?></a></a><br><br> 
 
         <!--Haroon-->
         <form id="form-login" data-ajax="false" method="post" accept-charset="utf-8" enctype='multipart/form-data'>

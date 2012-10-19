@@ -12,7 +12,6 @@ can take photos, tag them, and upload them to a photo pool without having to log
 * it easy for you to follow the strict tagging principles you defined in 202. 
 * Or, investigate automatic tagging using the TimesTags API, or some other approach.
 
-
 Members & Roles
 ---
 * Chan Kim (chan@ischool.berkeley.edu)
@@ -34,7 +33,8 @@ https://github.com/pttnguyen/Project-2
 
 Live URL
 ---
-http://bit.ly/floader
+* http://bit.ly/floader
+* Callback URL: http://people.ischool.berkeley.edu/~ptt.nguyen/Floader/phpFlickr/getToken.php
 
 Browser support
 ---
