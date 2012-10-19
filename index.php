@@ -33,25 +33,6 @@ if (!empty($_POST['submit-photo'])) {
      }
 } 
 
-$userID = $_SESSION["user-id"];
-$userName = $_SESSION["user-name"];
-$userName = $_SESSION["user-name"];
-if($userName == "")
-{
-	$userName = "ischoold";
-}
-$username = $_SESSION["user-name"];
-$username = $_SESSION["user-name"];
-if($userName == "")
-{
-	$userName = "ischoold";
-}
-$userID = $_SESSION["user-id"];
-if($userID == "")
-{
-	$userID = "88261501@N05";
-}
-
 function uploadPhoto($path, $title, $description, $tags) {
 
     $userName = $_SESSION["user-name"];
@@ -363,6 +344,7 @@ echo"<p class=\"note\">$total photos in the gallery</p>";
                 <p>ApiKey<input data-mini="true" data-theme="b" type="text"name="api-key"></p>
                 <p>ApiSecret<input data-mini="true" data-theme="b" type="text" name="api-secret"/></p>
                 <p>Token<input data-mini="true" data-theme="b" type="text" name="token"/></p>
+                <p><a href='http://people.ischool.berkeley.edu/~ptt.nguyen/Floader/phpFlickr/getToken.php' rel='external'>Callback URL</a></p>
                 <p><input type="submit" name= "submit-login" value="Submit" data-role="button"  data-icon="upload" data-theme="a" data-iconpos="top"></p>
             </div>
         </form>
